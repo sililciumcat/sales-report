@@ -39,10 +39,10 @@ sales-report/
 ## Примеры использования
 
 Стандартный запуск с настройками по умолчанию:
-python main.py
+# python main.py
 
 Запуск с указанием кастомных директорий:
-python main.py --data_dir custom_data/ --output_dir custom_reports/
+# python main.py --data_dir custom_data/ --output_dir custom_reports/
 
 Справка по доступным флагам:
-python main.py --help
+# python main.py --help
