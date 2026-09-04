@@ -26,23 +26,23 @@ sales-report/
 ## Установка и запуск
 
 1. Клонирование репозитория:
-   # git clone https://github.com/sililciumcat/sales-report
-   # cd sales-report
+   ### git clone https://github.com/sililciumcat/sales-report
+   ### cd sales-report
 
 2. Создание виртуального окружения и установка зависимостей:
-   # python -m venv venv
-   # source venv/bin/activate  # Для Linux/macOS
-   # venv\Scripts\activate   # Для Windows
+   ### python -m venv venv
+   ### source venv/bin/activate  # Для Linux/macOS
+   ### venv\Scripts\activate   # Для Windows
 
-   # pip install -r requirements.txt
+   ### pip install -r requirements.txt
 
 ## Примеры использования
 
 Стандартный запуск с настройками по умолчанию:
-# python main.py
+### python main.py
 
 Запуск с указанием кастомных директорий:
-# python main.py --data_dir custom_data/ --output_dir custom_reports/
+### python main.py --data_dir custom_data/ --output_dir custom_reports/
 
 Справка по доступным флагам:
-# python main.py --help
+### python main.py --help
