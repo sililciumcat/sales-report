@@ -1,7 +1,8 @@
 import csv
-import pandas as pd
-import openpyxl
 from pathlib import Path
+import openpyxl
+import pandas as pd
+
 
 class SalesDataProcessor:
     """Sales data main processor"""
@@ -14,17 +15,27 @@ class SalesDataProcessor:
 
         csv_files = list(self.data_dir.glob("*.csv"))
         if not csv_files:
-            raise FileNotFoundError("No files!")
+            raise FileNotFoundError(f"В директории '{self.data_dir}' не найдено ни одного CSV файла.")
+
+        required_columns = {"price", "quantity", "category", "product"}
         dfs = []
 
         for file in csv_files:
-            dfs.append(pd.read_csv(file))
+            df = pd.read_csv(file)
 
-        df = pd.concat(dfs, ignore_index = True)
+            # Проверяем, все ли нужные колонки на месте
+            if not required_columns.issubset(df.columns):
+                missing = required_columns - set(df.columns)
+                raise ValueError(
+                    f"В файле {file.name} не хватает колонок: {missing}"
+                )
 
+            dfs.append(df)
+
+        df = pd.concat(dfs, ignore_index=True)
         data_frame = df.drop_duplicates()
+        data_frame["total_amount"] = (
+            data_frame["quantity"] * data_frame["price"]
+        )
 
-        data_frame['total_amount'] = data_frame['quantity'] * data_frame['price']
-        
         return data_frame
-    
