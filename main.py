@@ -1,19 +1,26 @@
 from src.processor import SalesDataProcessor
 from src.metrics import SalesMetrics
+from src.reporter import ReportGenerator
 
-# 1. Загрузка данных
+# Загрузка данных
 reading = SalesDataProcessor()
 df = reading.load_all_csv()
 
-# 2. Инициализация метрик с передачей df
+
+# Инициализация метрик с передачей df
 metrics = SalesMetrics(df)
 
-# 3. Расчёт аналитики
+# Инициализация создателя репортов
+reports = ReportGenerator()
+
+# Расчёт аналитики
 total_revenue = metrics.get_total_revenue()
 sales_by_cat = metrics.get_sales_by_category()
 top_products = metrics.top_products()
+reports.save_to_csv(sales_by_cat, "sales_by_category.csv")
+reports.save_to_csv(top_products, "top_products.csv")
 
-# 4. Вывод результатов
+# Вывод результатов
 print("=== Всего выручки ===")
 print(total_revenue)
 print("\n=== Продажи по категориям ===")
